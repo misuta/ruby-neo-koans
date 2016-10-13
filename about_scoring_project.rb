@@ -31,6 +31,66 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 
 def score(dice)
   # You need to write this method
+  unless dice.size != 0
+    score = 0 
+    return score
+  end
+
+  score = 0
+  i = dice.size
+
+  dices_1 = dice.find_all { |n| n == 1 }
+  dices_2 = dice.find_all { |n| n == 2 }
+  dices_3 = dice.find_all { |n| n == 3 }
+  dices_4 = dice.find_all { |n| n == 4 }
+  dices_5 = dice.find_all { |n| n == 5 }
+  dices_6 = dice.find_all { |n| n == 6 }
+
+  while i > 0
+    if dices_1.size >= 1 && dices_1.size < 3
+      score = score + ( dices_1.size * 100 )
+      i -= dices_1.size
+    end
+    if dices_1.size == 3
+      score = score + 1000
+      i -= dices_1.size
+    end
+    if dices_1.size > 3
+      score = score + 1000 + ((dices_1.size - 3) * 100)
+      i -= dices_1.size
+    end
+    if dices_2.size >= 3
+      score = score + 200
+      i -= dices_2.size
+    end
+    if dices_3.size >= 3
+      score = score + 300
+      i -= dices_3.size
+    end
+    if dices_4.size >= 3
+      score = score + 400
+      i -= dices_4.size
+    end
+    if dices_5.size >= 1 && dices_5.size < 3
+      score = score + (dices_5.size * 50)
+      i -= dices_5.size
+    end 
+    if dices_5.size == 3
+      score += 500
+      i -= dices_5.size
+    end
+    if dices_5.size > 3
+      score = score + 500 + ((dices_5.size - 3) * 50)
+      i -= dices_5.size
+    end
+    if dices_6.size >= 3
+      score = score + 600
+      i -= dices_6.size
+    else
+      i -= 1
+    end
+    return score
+  end
 end
 
 class AboutScoringProject < Neo::Koan
